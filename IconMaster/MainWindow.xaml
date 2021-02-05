@@ -1,0 +1,31 @@
+﻿<Window x:Class="IconMaster.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Icon Master" Height="450" Width="800" Icon="Resources/Icons/App.ico">
+
+    <Grid>
+        <Menu x:Name="menu" Height="20" VerticalAlignment="Top" Background="{x:Null}">
+            <MenuItem Header="File">
+                <MenuItem Header="New..." Icon="{DynamicResource imgNewFile}"/>
+                <MenuItem x:Name="mmOpen" Header="Open" Icon="{StaticResource imgOpen}"/>
+                <Separator/>
+                <MenuItem x:Name="mmSave" Header="Save" Icon="{StaticResource imgSave}"/>
+                <MenuItem Header="Save As..." />
+                <MenuItem x:Name="mmSaveAll" Header="Save All" Icon="{DynamicResource imgSaveAll}"/>
+                <Separator/>
+                <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="Edit" ></MenuItem>
+            <MenuItem Header="View" ></MenuItem>
+        </Menu>
+        <ToolBar x:Name="toolBar" Height="30" VerticalAlignment="Top" Margin="0,20,0,0" Background="White" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left">
+            <Button x:Name="bNewFile" Content="{DynamicResource imgNewFile}" VerticalAlignment="Stretch"/>
+            <Button x:Name="bOpen" Content="{DynamicResource imgOpen}" VerticalAlignment="Stretch"/>
+            <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
+            <Button x:Name="bSaveAll" Content="{DynamicResource imgSaveAll}" VerticalAlignment="Stretch"/>
+        </ToolBar>
+    </Grid>
+</Window>
