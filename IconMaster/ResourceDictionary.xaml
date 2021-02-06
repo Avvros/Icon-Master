@@ -7,6 +7,10 @@
     <Image x:Key="imgSaveAll" x:Shared="false" Source="Resources/Icons/SaveAll.png"/>
     <Image x:Key="imgOpen" x:Shared="false" Source="Resources/Icons/Open.png"/>
     <Image x:Key="imgNewFile" x:Shared="false" Source="Resources/Icons/NewFile.png"/>
+    <Image x:Key="imgUndo" x:Shared="false" Source="Resources/Icons/Undo.png"/>
+    <Image x:Key="imgRedo" x:Shared="false" Source="Resources/Icons/Redo.png"/>
+    <Image x:Key="imgPencil" x:Shared="false" Source="Resources/Icons/Pencil64.ico" Width="16" Height="16"/>
+    <Image x:Key="imgEraser" x:Shared="false" Source="Resources/Icons/Eraser.png" Width="16" Height="16"/>
     
     <SolidColorBrush x:Key="ToolBarHorizontalBackground" Color="#FFEEF5FD"/>
     <SolidColorBrush x:Key="ToolBarToggleButtonVerticalBackground" Color="#FFEEF5FD"/>
@@ -190,6 +194,20 @@
             <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
                 <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
             </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="IconMasterToolBarTrayStyle" TargetType="{x:Type ToolBarTray}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
+                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="IconMasterPoweredButton" TargetType="{x:Type Button}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 

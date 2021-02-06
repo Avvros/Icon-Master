@@ -6,26 +6,39 @@
         mc:Ignorable="d"
         Title="Icon Master" Height="450" Width="800" Icon="Resources/Icons/App.ico">
 
-    <Grid>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <Menu x:Name="menu" Height="20" VerticalAlignment="Top" Background="{x:Null}">
             <MenuItem Header="File">
                 <MenuItem Header="New..." Icon="{DynamicResource imgNewFile}"/>
-                <MenuItem x:Name="mmOpen" Header="Open" Icon="{StaticResource imgOpen}"/>
+                <MenuItem x:Name="mmOpen" Header="Open" Icon="{StaticResource imgOpen}" Click="OpenFile"/>
                 <Separator/>
                 <MenuItem x:Name="mmSave" Header="Save" Icon="{StaticResource imgSave}"/>
                 <MenuItem Header="Save As..." />
                 <MenuItem x:Name="mmSaveAll" Header="Save All" Icon="{DynamicResource imgSaveAll}"/>
                 <Separator/>
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit" Click="Exit"/>
             </MenuItem>
-            <MenuItem Header="Edit" ></MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem x:Name="mmUndo" Header="Undo" Icon="{DynamicResource imgUndo}"/>
+                <MenuItem x:Name="mmRedo" Header="Redo" Icon="{DynamicResource imgRedo}"/>
+            </MenuItem>
             <MenuItem Header="View" ></MenuItem>
         </Menu>
-        <ToolBar x:Name="toolBar" Height="30" VerticalAlignment="Top" Margin="0,20,0,0" Background="White" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left">
-            <Button x:Name="bNewFile" Content="{DynamicResource imgNewFile}" VerticalAlignment="Stretch"/>
-            <Button x:Name="bOpen" Content="{DynamicResource imgOpen}" VerticalAlignment="Stretch"/>
-            <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
-            <Button x:Name="bSaveAll" Content="{DynamicResource imgSaveAll}" VerticalAlignment="Stretch"/>
-        </ToolBar>
+        <ToolBarTray Height="30" VerticalAlignment="Top" Margin="0,20,0,0" Background="White" Style="{DynamicResource IconMasterToolBarTrayStyle}">
+            <ToolBar x:Name="mainControls" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left" Background="White">
+                <Button x:Name="bNewFile" Content="{DynamicResource imgNewFile}" VerticalAlignment="Stretch"/>
+                <Button x:Name="bOpen" Content="{DynamicResource imgOpen}" Click="OpenFile" VerticalAlignment="Stretch"/>
+                <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
+                <Button x:Name="bSaveAll" Content="{DynamicResource imgSaveAll}" VerticalAlignment="Stretch"/>
+                <Separator/>
+                <Button x:Name="bUndo" Style="{DynamicResource IconMasterPoweredButton}" Content="{DynamicResource imgUndo}" VerticalAlignment="Stretch" IsEnabled="False"/>
+                <Button x:Name="bRedo" Style="{DynamicResource IconMasterPoweredButton}" Content="{DynamicResource imgRedo}" VerticalAlignment="Stretch" IsEnabled="False"/>
+            </ToolBar>
+            <ToolBar Background="White" Style="{DynamicResource IconMasterToolBarStyle}">
+                <Button x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
+                <Button x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <Image x:Name="Viewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0"/>
     </Grid>
 </Window>
