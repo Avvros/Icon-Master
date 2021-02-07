@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconmaster="clr-namespace:IconMaster"
         mc:Ignorable="d"
         Title="Icon Master" Height="450" Width="800" Icon="Resources/Icons/App.ico">
 
-    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
-        <Menu x:Name="menu" Height="20" VerticalAlignment="Top" Background="{x:Null}">
+    <Grid>
+        <Menu x:Name="menu" VerticalAlignment="Top" Background="{x:Null}">
             <MenuItem Header="File">
                 <MenuItem Header="New..." Icon="{DynamicResource imgNewFile}"/>
                 <MenuItem x:Name="mmOpen" Header="Open" Icon="{StaticResource imgOpen}" Click="OpenFile"/>
@@ -19,8 +20,8 @@
                 <MenuItem Header="Exit" Click="Exit"/>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem x:Name="mmUndo" Header="Undo" Icon="{DynamicResource imgUndo}"/>
-                <MenuItem x:Name="mmRedo" Header="Redo" Icon="{DynamicResource imgRedo}"/>
+                <MenuItem x:Name="mmUndo" Style="{DynamicResource IconMasterPoweredControl}" Header="Undo" Icon="{DynamicResource imgUndo}" IsEnabled="False"/>
+                <MenuItem x:Name="mmRedo" Style="{DynamicResource IconMasterPoweredControl}" Header="Redo" Icon="{DynamicResource imgRedo}" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="View" ></MenuItem>
         </Menu>
@@ -31,14 +32,42 @@
                 <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
                 <Button x:Name="bSaveAll" Content="{DynamicResource imgSaveAll}" VerticalAlignment="Stretch"/>
                 <Separator/>
-                <Button x:Name="bUndo" Style="{DynamicResource IconMasterPoweredButton}" Content="{DynamicResource imgUndo}" VerticalAlignment="Stretch" IsEnabled="False"/>
-                <Button x:Name="bRedo" Style="{DynamicResource IconMasterPoweredButton}" Content="{DynamicResource imgRedo}" VerticalAlignment="Stretch" IsEnabled="False"/>
+                <Button x:Name="bUndo" Style="{DynamicResource IconMasterPoweredControl}" Content="{DynamicResource imgUndo}" VerticalAlignment="Stretch" IsEnabled="False"/>
+                <Button x:Name="bRedo" Style="{DynamicResource IconMasterPoweredControl}" Content="{DynamicResource imgRedo}" VerticalAlignment="Stretch" IsEnabled="False"/>
             </ToolBar>
             <ToolBar Background="White" Style="{DynamicResource IconMasterToolBarStyle}">
                 <Button x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
                 <Button x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
             </ToolBar>
         </ToolBarTray>
-        <Image x:Name="Viewer" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,50,0,0"/>
+        <TabControl x:Name="OpenedFiles" Margin="0,50,0,0">
+            <TabItem x:Name="I" Header="Новая иконка 1">
+                <TabItem.Content>
+                    <Grid x:Name="Page">
+                        <Grid HorizontalAlignment="Left" Grid.Column="2">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent">
+                                A
+                            </Button>
+                            <Button Grid.Column="1">
+                                B
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
