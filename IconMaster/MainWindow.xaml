@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconmaster="clr-namespace:IconMaster"
         mc:Ignorable="d"
-        Title="Icon Master" Height="450" Width="800" Icon="Resources/Icons/App.ico">
+        Title="Icon Master" Height="500" Width="800" Icon="Resources/Icons/App.ico">
 
     <Grid>
         <Menu x:Name="menu" VerticalAlignment="Top" Background="{x:Null}">
@@ -44,7 +44,8 @@
             <TabItem x:Name="I" Header="Новая иконка 1">
                 <TabItem.Content>
                     <Grid x:Name="Page">
-                        <Grid HorizontalAlignment="Left" Grid.Column="2">
+                        <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left">
+                        <Grid x:Name="DrawTools" HorizontalAlignment="Left" Grid.Column="2">
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -65,6 +66,9 @@
                                 B
                             </Button>
                         </Grid>
+                        </Border>
+                        <iconmaster:EditorGrid Margin="60,10,10,10"/>
+
                     </Grid>
                 </TabItem.Content>
             </TabItem>

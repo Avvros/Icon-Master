@@ -36,5 +36,10 @@ namespace IconMaster
         {
             Environment.Exit(0);
         }
+
+        private void Workspace_Initialized(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
