@@ -14,33 +14,35 @@ namespace IconMaster
 
         private WriteableBitmap data;
 
+        private int dataWidth, dataHeight;
+
         public EditorGrid()
         {
             InitializeComponent();
 
-            int width = 300;
-            int height = 300;
+            dataWidth = 300;
+            dataHeight = 300;
 
             // Create a writeable bitmap (which is a valid WPF Image Source)
-            data = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgra32, null);
+            data = new WriteableBitmap(dataWidth, dataHeight, 96, 96, PixelFormats.Bgra32, null);
 
             // Create an array of pixels to contain pixel color values
-            uint[] pixels = new uint[width * height];
+            uint[] pixels = new uint[dataWidth * dataHeight];
 
             int red;
             int green;
             int blue;
             int alpha;
 
-            for (int x = 0; x < width; ++x)
+            for (int x = 0; x < dataWidth; ++x)
             {
-                for (int y = 0; y < height; ++y)
+                for (int y = 0; y < dataHeight; ++y)
                 {
-                    int i = width * y + x;
+                    int i = dataWidth * y + x;
 
                     red = 0;
-                    green = 255 * y / height;
-                    blue = 255 * (width - x) / width;
+                    green = 255 * y / dataHeight;
+                    blue = 255 * (dataWidth - x) / dataWidth;
                     alpha = 255;
 
                     pixels[i] = (uint)((blue << 24) + (green << 16) + (red << 8) + alpha);
@@ -48,10 +50,16 @@ namespace IconMaster
             }
 
             // apply pixels to bitmap
-            data.WritePixels(new Int32Rect(0, 0, 300, 300), pixels, width * 4, 0);
+            data.WritePixels(new Int32Rect(0, 0, 300, 300), pixels, dataWidth * 4, 0);
 
             // set image source to the new bitmap
-            presenter.Source = data;
+            Presenter.Source = data;
+        }
+
+        public void DrawPixel(int i, int j, Color color)
+        {
+            if (i < 0 || i >= dataWidth || j < 0 || j >= dataHeight || color == null) return;
+            data.SetPixel(i, j, color);
         }
     }
 }

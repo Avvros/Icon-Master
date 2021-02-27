@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconmaster="clr-namespace:IconMaster"
         mc:Ignorable="d"
-        Title="Icon Master" Height="500" Width="800" Icon="Resources/Icons/App.ico">
+        Title="Icon Master" Height="600" Width="800" Icon="Resources/Icons/App.ico">
 
     <Grid>
-        <Menu x:Name="menu" VerticalAlignment="Top" Background="{x:Null}">
+        <Menu x:Name="MainMenu" VerticalAlignment="Top" Background="{x:Null}">
             <MenuItem Header="File">
                 <MenuItem Header="New..." Icon="{DynamicResource imgNewFile}"/>
                 <MenuItem x:Name="mmOpen" Header="Open" Icon="{StaticResource imgOpen}" Click="OpenFile"/>
@@ -25,8 +25,8 @@
             </MenuItem>
             <MenuItem Header="View" ></MenuItem>
         </Menu>
-        <ToolBarTray Height="30" VerticalAlignment="Top" Margin="0,20,0,0" Background="White" Style="{DynamicResource IconMasterToolBarTrayStyle}">
-            <ToolBar x:Name="mainControls" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left" Background="White">
+        <ToolBarTray x:Name="GlobalActions" Height="30" VerticalAlignment="Top" Margin="0,20,0,0" Background="White" Style="{DynamicResource IconMasterToolBarTrayStyle}">
+            <ToolBar x:Name="FileControls" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left" Background="White">
                 <Button x:Name="bNewFile" Content="{DynamicResource imgNewFile}" VerticalAlignment="Stretch"/>
                 <Button x:Name="bOpen" Content="{DynamicResource imgOpen}" Click="OpenFile" VerticalAlignment="Stretch"/>
                 <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
@@ -35,19 +35,20 @@
                 <Button x:Name="bUndo" Style="{DynamicResource IconMasterPoweredControl}" Content="{DynamicResource imgUndo}" VerticalAlignment="Stretch" IsEnabled="False"/>
                 <Button x:Name="bRedo" Style="{DynamicResource IconMasterPoweredControl}" Content="{DynamicResource imgRedo}" VerticalAlignment="Stretch" IsEnabled="False"/>
             </ToolBar>
-            <ToolBar Background="White" Style="{DynamicResource IconMasterToolBarStyle}">
-                <Button x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
-                <Button x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
+            <ToolBar x:Name="DataMovement" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left" Background="White">
+                <Button x:Name="bCut" Content="{DynamicResource imgCut}" VerticalAlignment="Stretch"/>
+                <Button x:Name="bCopy" Content="{DynamicResource imgCopy}" VerticalAlignment="Stretch"/>
+                <Button x:Name="bPaste" Content="{DynamicResource imgPaste}" VerticalAlignment="Stretch"/>
             </ToolBar>
         </ToolBarTray>
         <TabControl x:Name="OpenedFiles" Margin="0,50,0,0">
             <TabItem x:Name="I" Header="Новая иконка 1">
                 <TabItem.Content>
                     <Grid x:Name="Page">
-                        <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left">
+                        <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left" Margin="0,0,0,25">
                         <Grid x:Name="DrawTools" HorizontalAlignment="Left" Grid.Column="2">
                             <Grid.Resources>
-                                <Style TargetType="{x:Type Button}">
+                                <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="BorderBrush" Value="Transparent"/>
                                 </Style>
@@ -59,16 +60,16 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
-                            <Button Grid.Column="0" Background="Transparent" BorderBrush="Transparent">
-                                A
-                            </Button>
-                            <Button Grid.Column="1">
-                                B
-                            </Button>
+                            <RadioButton Grid.Column="0" x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
+                            <RadioButton Grid.Column="1" x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
                         </Grid>
                         </Border>
-                        <iconmaster:EditorGrid Margin="60,10,10,10"/>
-
+                        <iconmaster:EditorGrid x:Name="Workspace" Margin="60,10,10,25" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="EditorGrid_MouseMove"/>
+                        <StatusBar VerticalAlignment="Bottom" Height="20">
+                            <StatusBarItem HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock x:Name="tbCoords">Text</TextBlock>
+                            </StatusBarItem>
+                        </StatusBar>
                     </Grid>
                 </TabItem.Content>
             </TabItem>

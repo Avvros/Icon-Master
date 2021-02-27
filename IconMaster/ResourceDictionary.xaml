@@ -9,6 +9,9 @@
     <Image x:Key="imgNewFile" x:Shared="false" Source="Resources/Icons/NewFile.png"/>
     <Image x:Key="imgUndo" x:Shared="false" Source="Resources/Icons/Undo.png"/>
     <Image x:Key="imgRedo" x:Shared="false" Source="Resources/Icons/Redo.png"/>
+    <Image x:Key="imgCut" x:Shared="false" Source="Resources/Icons/Cut.png"/>
+    <Image x:Key="imgCopy" x:Shared="false" Source="Resources/Icons/Copy.png"/>
+    <Image x:Key="imgPaste" x:Shared="false" Source="Resources/Icons/Paste.png"/>
     <Image x:Key="imgPencil" x:Shared="false" Source="Resources/Icons/Pencil64.ico" Width="16" Height="16"/>
     <Image x:Key="imgEraser" x:Shared="false" Source="Resources/Icons/Eraser.png" Width="16" Height="16"/>
     

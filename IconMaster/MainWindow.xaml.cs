@@ -1,8 +1,7 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace IconMaster
 {
@@ -37,9 +36,14 @@ namespace IconMaster
             Environment.Exit(0);
         }
 
-        private void Workspace_Initialized(object sender, EventArgs e)
+        private void EditorGrid_MouseMove(object sender, MouseEventArgs e)
         {
-            
+            Point position = e.GetPosition(Workspace);
+            tbCoords.Text = ((int)position.X).ToString() + "; " + ((int) position.Y).ToString();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Workspace.DrawPixel((int) position.X, (int) position.Y, Colors.Black);
+            }
         }
     }
 }
