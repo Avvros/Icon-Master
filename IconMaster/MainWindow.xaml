@@ -43,35 +43,7 @@
         </ToolBarTray>
         <TabControl x:Name="OpenedFiles" Margin="0,50,0,0">
             <TabItem x:Name="I" Header="Новая иконка 1">
-                <TabItem.Content>
-                    <Grid x:Name="Page">
-                        <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left" Margin="0,0,0,25">
-                        <Grid x:Name="DrawTools" HorizontalAlignment="Left" Grid.Column="2">
-                            <Grid.Resources>
-                                <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="BorderBrush" Value="Transparent"/>
-                                </Style>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="25"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Column="0" x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
-                            <RadioButton Grid.Column="1" x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
-                        </Grid>
-                        </Border>
-                        <iconmaster:EditorGrid x:Name="Workspace" Margin="60,10,10,25" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="EditorGrid_MouseMove"/>
-                        <StatusBar VerticalAlignment="Bottom" Height="20">
-                            <StatusBarItem HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock x:Name="tbCoords">Text</TextBlock>
-                            </StatusBarItem>
-                        </StatusBar>
-                    </Grid>
-                </TabItem.Content>
+                <iconmaster:EditorPage/>
             </TabItem>
         </TabControl>
     </Grid>

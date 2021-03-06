@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="IconMaster.EditorPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IconMaster"
+             mc:Ignorable="d" 
+             d:DesignHeight="492.44" d:DesignWidth="787.6">
+
+    <Grid x:Name="Page">
+        <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left" Margin="0,0,0,25">
+            <Grid x:Name="DrawTools" HorizontalAlignment="Left" Grid.Column="2">
+                <Grid.Resources>
+                    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <RadioButton Grid.Column="0" x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
+                <RadioButton Grid.Column="1" x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
+            </Grid>
+        </Border>
+        <local:EditorGrid x:Name="Workspace" Margin="60,10,10,25" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="Workspace_MouseMove" MouseDown="Workspace_MouseDown"/>
+        <StatusBar VerticalAlignment="Bottom" Height="20">
+            <StatusBarItem HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbCoords"><Run Text="Text"/></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</UserControl>
