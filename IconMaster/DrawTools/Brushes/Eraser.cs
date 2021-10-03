@@ -1,17 +1,14 @@
 ﻿using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using DrawingContext = IconMaster.Core.DrawingContext;
 
 namespace IconMaster.DrawTools.Brushes
 {
-    class Eraser : Brush
+    public class Eraser : IBrush
     {
-        public Eraser(WriteableBitmap bitmap, int bitmapWidth, int bitmapHeight) : base(bitmap, bitmapWidth, bitmapHeight)
+        public void Draw(DrawingContext context, int x, int y)
         {
-        }
-
-        protected override void DrawInternal(int x, int y)
-        {
-            bitmap.SetPixel(x, y, Colors.Transparent);
+            context.Bitmap.SetPixel(x, y, Colors.Transparent);
         }
     }
 }

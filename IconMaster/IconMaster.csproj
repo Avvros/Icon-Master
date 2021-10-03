@@ -96,8 +96,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DrawTools\Brushes\Brush.cs" />
+    <Compile Include="Commands\SetBrushCommand.cs" />
+    <Compile Include="Core\DrawingContext.cs" />
+    <Compile Include="Core\Editor.cs" />
     <Compile Include="DrawTools\Brushes\Eraser.cs" />
+    <Compile Include="DrawTools\Brushes\IBrush.cs" />
     <Compile Include="DrawTools\Brushes\Pen.cs" />
     <Compile Include="EditorGrid.xaml.cs">
       <DependentUpon>EditorGrid.xaml</DependentUpon>
@@ -132,6 +135,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
+    <None Include="DependencyProperty.snippet" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

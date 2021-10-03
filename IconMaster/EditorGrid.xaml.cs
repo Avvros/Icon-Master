@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using IconMaster.Core;
 
 namespace IconMaster
 {
@@ -13,37 +15,64 @@ namespace IconMaster
     public partial class EditorGrid : UserControl
     {
 
-        private WriteableBitmap data;
+        #region Constants
 
-        private int dataWidth, dataHeight;
+        public const int DEFAULT_SIZE = 300;
 
-        public EditorGrid()
+        public readonly static Func<WriteableBitmap> DEFAULT_BITMAP = () => new WriteableBitmap(DEFAULT_SIZE, DEFAULT_SIZE, 96, 96, PixelFormats.Bgra32, null);
+        #endregion
+
+        #region Bitmap Dimensions
+        private int _dataWidth, _dataHeight;
+        public int DataWidth { get => _dataWidth; set => _dataWidth = value > 0 ? value : DEFAULT_SIZE; }
+        public int DataHeight { get => _dataHeight; set => _dataHeight = value > 0 ? value : DEFAULT_SIZE; }
+
+        #endregion
+
+        #region DrawingContext Property
+
+        public Core.DrawingContext DrawingContext {
+            get => (Core.DrawingContext)GetValue(DrawingContextProperty);
+            set => SetValue(DrawingContextProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for DrawingContext.  This enables animation, styling, binding, etc...
+        public readonly static DependencyProperty DrawingContextProperty =
+            DependencyProperty.Register("DrawingContext", typeof(Core.DrawingContext), typeof(EditorGrid), new PropertyMetadata(OnDrawingContextChanged));
+
+        #endregion
+
+        private static void OnDrawingContextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            InitializeComponent();
+            (obj as EditorGrid).Draw();
+        }
 
-            dataWidth = 300;
-            dataHeight = 300;
+        private void Draw()
+        {
+            WriteableBitmap bitmap = DrawingContext.Bitmap;
 
             // Create a writeable bitmap (which is a valid WPF Image Source)
-            data = new WriteableBitmap(dataWidth, dataHeight, 96, 96, PixelFormats.Bgra32, null);
+
+            _dataWidth = bitmap.PixelWidth;
+            _dataHeight = bitmap.PixelHeight;
 
             // Create an array of pixels to contain pixel color values
-            uint[] pixels = new uint[dataWidth * dataHeight];
+            uint[] pixels = new uint[_dataWidth * _dataHeight];
 
             int red;
             int green;
             int blue;
             int alpha;
 
-            for (int x = 0; x < dataWidth; ++x)
+            for (int x = 0; x < _dataWidth; ++x)
             {
-                for (int y = 0; y < dataHeight; ++y)
+                for (int y = 0; y < _dataHeight; ++y)
                 {
-                    int i = dataWidth * y + x;
+                    int i = _dataWidth * y + x;
 
                     red = 0;
-                    green = 255 * y / dataHeight;
-                    blue = 255 * (dataWidth - x) / dataWidth;
+                    green = 255 * y / _dataHeight;
+                    blue = 255 * (_dataWidth - x) / _dataWidth;
                     alpha = 255;
 
                     pixels[i] = (uint)((blue << 24) + (green << 16) + (red << 8) + alpha);
@@ -51,16 +80,25 @@ namespace IconMaster
             }
 
             // apply pixels to bitmap
-            data.WritePixels(new Int32Rect(0, 0, 300, 300), pixels, dataWidth * 4, 0);
+            bitmap.WritePixels(new Int32Rect(0, 0, 300, 300), pixels, _dataWidth * 4, 0);
 
             // set image source to the new bitmap
-            Presenter.Source = data;
+            Presenter.Source = bitmap;
+        }
+
+        public EditorGrid()
+        {
+            InitializeComponent();
         }
 
         public void DrawPixel(int i, int j, Color color)
         {
-            if (i < 0 || i >= dataWidth || j < 0 || j >= dataHeight || color == null) return;
-            data.SetPixel(i, j, color);
+            if (i < 0 || i >= _dataWidth || j < 0 || j >= _dataHeight || color == null)
+            {
+                return;
+            }
+
+            DrawingContext.Bitmap.SetPixel(i, j, color);
         }
 
         public Point GetRelativeMousePosition(MouseEventArgs e)

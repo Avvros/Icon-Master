@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using IconMaster.Core;
 
 namespace IconMaster
 {
@@ -10,8 +13,15 @@ namespace IconMaster
     /// </summary>
     public partial class EditorPage : UserControl
     {
-        public EditorPage()
+        public Editor Editor { get; }
+
+        public EditorPage() : this(EditorGrid.DEFAULT_BITMAP())
         {
+        }
+
+        public EditorPage(WriteableBitmap bitmap)
+        {
+            Editor = new Editor(bitmap);
             InitializeComponent();
         }
 
@@ -37,7 +47,7 @@ namespace IconMaster
 
         private void Workspace_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OnDrawingAction(e);
+            _ = OnDrawingAction(e);
         }
     }
 }

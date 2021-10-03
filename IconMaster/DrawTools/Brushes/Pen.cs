@@ -1,19 +1,13 @@
-﻿using System;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
+using IconMaster.Core;
 
 namespace IconMaster.DrawTools.Brushes
 {
-    class Pen : Brush
+    public class Pen : IBrush
     {
-        public Pen(WriteableBitmap bitmap, int bitmapWidth, int bitmapHeight) : base(bitmap, bitmapWidth, bitmapHeight)
+        public void Draw(DrawingContext context, int x, int y)
         {
-            Color = Colors.Black;
-        }
-
-        protected override void DrawInternal(int x, int y)
-        {
-            bitmap.SetPixel(x, y, Color);
+            context.Bitmap.SetPixel(x, y, context.Color);
         }
     }
 }
