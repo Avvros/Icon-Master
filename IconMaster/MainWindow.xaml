@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconmaster="clr-namespace:IconMaster"
         mc:Ignorable="d"
+        x:Name="Root"
         Title="Icon Master" Height="600" Width="800" Icon="Resources/Icons/App.ico">
 
     <Grid>
@@ -41,10 +42,12 @@
                 <Button x:Name="bPaste" Content="{DynamicResource imgPaste}" VerticalAlignment="Stretch"/>
             </ToolBar>
         </ToolBarTray>
-        <TabControl x:Name="OpenedFiles" Margin="0,50,0,0">
-            <TabItem x:Name="I" Header="Новая иконка 1">
-                <iconmaster:EditorPage/>
-            </TabItem>
+        <TabControl x:Name="OpenedFiles" Margin="0,50,0,0" ItemsSource="{Binding EditorPages, ElementName=Root}">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Header" Value="{Binding Header}"/>
+                </Style>
+            </TabControl.ItemContainerStyle>
         </TabControl>
     </Grid>
 </Window>

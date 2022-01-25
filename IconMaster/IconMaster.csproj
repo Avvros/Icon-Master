@@ -80,11 +80,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ToolGrid.xaml.cs">
+      <DependentUpon>ToolGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service\SupportExtensions.cs" />
     <Page Include="EditorGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,7 +108,7 @@
     <Compile Include="Core\DrawingContext.cs" />
     <Compile Include="Core\Editor.cs" />
     <Compile Include="DrawTools\Brushes\Eraser.cs" />
-    <Compile Include="DrawTools\Brushes\IBrush.cs" />
+    <Compile Include="DrawTools\Tool.cs" />
     <Compile Include="DrawTools\Brushes\Pen.cs" />
     <Compile Include="EditorGrid.xaml.cs">
       <DependentUpon>EditorGrid.xaml</DependentUpon>
@@ -136,7 +144,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <None Include="DependencyProperty.snippet" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +13,21 @@ namespace IconMaster
     /// </summary>
     public partial class EditorPage : UserControl
     {
+
+
+        #region Header Property
+        [Bindable(true)]
+        public string Header {
+            get => (string)GetValue(HeaderProperty);
+            set => SetValue(HeaderProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Header.  This enables animation, styling, binding, etc...
+        public readonly static DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof(string), typeof(EditorPage), new PropertyMetadata("Новая иконка"));
+
+        #endregion
+
         public Editor Editor { get; }
 
         public EditorPage() : this(EditorGrid.DEFAULT_BITMAP())

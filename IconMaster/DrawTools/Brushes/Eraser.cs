@@ -4,11 +4,15 @@ using DrawingContext = IconMaster.Core.DrawingContext;
 
 namespace IconMaster.DrawTools.Brushes
 {
-    public class Eraser : IBrush
+    public class Eraser : Tool
     {
-        public void Draw(DrawingContext context, int x, int y)
+        public Eraser(DrawingContext context) : base(context)
         {
-            context.Bitmap.SetPixel(x, y, Colors.Transparent);
+        }
+
+        public override void Draw(int x, int y)
+        {
+            Context.Bitmap.SetPixel(x, y, Colors.Transparent);
         }
     }
 }

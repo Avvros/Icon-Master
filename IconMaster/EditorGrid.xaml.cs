@@ -22,13 +22,6 @@ namespace IconMaster
         public readonly static Func<WriteableBitmap> DEFAULT_BITMAP = () => new WriteableBitmap(DEFAULT_SIZE, DEFAULT_SIZE, 96, 96, PixelFormats.Bgra32, null);
         #endregion
 
-        #region Bitmap Dimensions
-        private int _dataWidth, _dataHeight;
-        public int DataWidth { get => _dataWidth; set => _dataWidth = value > 0 ? value : DEFAULT_SIZE; }
-        public int DataHeight { get => _dataHeight; set => _dataHeight = value > 0 ? value : DEFAULT_SIZE; }
-
-        #endregion
-
         #region DrawingContext Property
 
         public Core.DrawingContext DrawingContext {
@@ -53,8 +46,8 @@ namespace IconMaster
 
             // Create a writeable bitmap (which is a valid WPF Image Source)
 
-            _dataWidth = bitmap.PixelWidth;
-            _dataHeight = bitmap.PixelHeight;
+            int _dataWidth = bitmap.PixelWidth;
+            int _dataHeight = bitmap.PixelHeight;
 
             // Create an array of pixels to contain pixel color values
             uint[] pixels = new uint[_dataWidth * _dataHeight];
@@ -93,12 +86,13 @@ namespace IconMaster
 
         public void DrawPixel(int i, int j, Color color)
         {
-            if (i < 0 || i >= _dataWidth || j < 0 || j >= _dataHeight || color == null)
+            WriteableBitmap bitmap = DrawingContext.Bitmap;
+            if (i < 0 || i >= bitmap.PixelWidth || j < 0 || j >= bitmap.PixelHeight || color == null)
             {
                 return;
             }
 
-            DrawingContext.Bitmap.SetPixel(i, j, color);
+            bitmap.SetPixel(i, j, color);
         }
 
         public Point GetRelativeMousePosition(MouseEventArgs e)

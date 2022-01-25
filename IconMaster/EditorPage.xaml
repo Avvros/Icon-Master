@@ -4,46 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IconMaster"
-             xmlns:core="clr-namespace:IconMaster.Core"
-             xmlns:brushes="clr-namespace:IconMaster.DrawTools.Brushes"
              mc:Ignorable="d"
              x:Name="Root"
              d:DesignHeight="492.44" d:DesignWidth="787.6">
-
-    <UserControl.Resources>
-        <core:Editor x:Key="test">
-            
-        </core:Editor>
-    </UserControl.Resources>
-
+    
     <Grid x:Name="Page" DataContext="{Binding ElementName=Root, Path=Editor}">
         <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left" Margin="0,0,0,25">
-            <Grid x:Name="DrawTools" HorizontalAlignment="Left" Grid.Column="2">
-                <Grid.Resources>
-                    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                    </Style>
-                    <!--<brushes:Pen ></brushes:Pen>-->
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="25"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                </Grid.RowDefinitions>
-                <RadioButton Grid.Column="0" x:Name="bPencil" Content="{DynamicResource imgPencil}"/>
-                <RadioButton Grid.Column="1" x:Name="bEraser" Content="{DynamicResource imgEraser}"/>
-            </Grid>
+            <local:ToolGrid>
+                <local:ToolGridItem Content="{DynamicResource imgEraser}"/>
+            </local:ToolGrid>
         </Border>
         <local:EditorGrid x:Name="Workspace" Margin="60,10,10,25" HorizontalAlignment="Center" VerticalAlignment="Center" MouseMove="Workspace_MouseMove" MouseDown="Workspace_MouseDown" DrawingContext="{Binding DrawingContext}"/>
         <StatusBar VerticalAlignment="Bottom" Height="20">
             <StatusBarItem HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock x:Name="tbCoords"><Run Text="Text"/></TextBlock>
-            </StatusBarItem>
-            <StatusBarItem VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock x:Name="EditorDebug" Text="{Binding DrawingContext}"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace IconMaster
@@ -8,8 +9,16 @@ namespace IconMaster
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public List<EditorPage> EditorPages { get; }
+
         public MainWindow()
         {
+            EditorPages = new List<EditorPage>() {
+                new EditorPage() {
+                    Header = "Новая иконка 1"
+                }
+            };
             InitializeComponent();
         }
 

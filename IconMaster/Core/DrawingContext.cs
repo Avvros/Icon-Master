@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using IconMaster.DrawTools;
 using IconMaster.DrawTools.Brushes;
 using Color = System.Windows.Media.Color;
 
@@ -20,24 +21,20 @@ namespace IconMaster.Core
         public DrawingContext(WriteableBitmap bitmap)
         {
             _bitmap = bitmap ?? throw new ArgumentNullException("Bitmap can't be null");
-#if DEBUG
-            _color = Colors.Red;
-#else
-            _color = Colors.Transparent;
-#endif
+            _color = Colors.Black;
         }
 
-        public Color Color { get => _color; set => _color = value != null ? value : Colors.Transparent; }
+        public Color Color { get => _color; set => _color = value != null ? value : Colors.Black; }
         public WriteableBitmap Bitmap => _bitmap;
 
-        public void Draw(IBrush brush, int x, int y)
+        public void Draw(Tool brush, int x, int y)
         {
             if (brush == null || x < 0 || y >= _bitmap.PixelWidth || y < 0 || y >= _bitmap.PixelHeight)
             {
                 return;
             }
 
-            brush.Draw(this, x, y);
+            brush.Draw(x, y);
 
         }
     }

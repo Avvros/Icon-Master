@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using IconMaster.DrawTools;
 using IconMaster.DrawTools.Brushes;
 
 namespace IconMaster.Commands
@@ -14,7 +15,7 @@ namespace IconMaster.Commands
 
         public bool CanExecute(object parameter)
         {
-            return parameter is IBrush;
+            return parameter is Tool;
         }
 
         public void Execute(object parameter)

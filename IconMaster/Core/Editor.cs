@@ -5,6 +5,7 @@ namespace IconMaster.Core
 {
     public class Editor
     {
+
         public DrawingContext DrawingContext { get; }
 
         public Editor()
@@ -23,7 +24,7 @@ namespace IconMaster.Core
 
         public override string ToString()
         {
-            return "Editor with configuration: " + DrawingContext.ToString();
+            return $"Editor {{ DrawingContext = {DrawingContext} }}";
         }
     }
 

@@ -3,11 +3,15 @@ using IconMaster.Core;
 
 namespace IconMaster.DrawTools.Brushes
 {
-    public class Pen : IBrush
+    public class Pen : Tool
     {
-        public void Draw(DrawingContext context, int x, int y)
+        public Pen(DrawingContext context) : base(context)
         {
-            context.Bitmap.SetPixel(x, y, context.Color);
+        }
+
+        public override void Draw(int x, int y)
+        {
+            Context.Bitmap.SetPixel(x, y, Context.Color);
         }
     }
 }
