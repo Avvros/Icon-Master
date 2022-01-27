@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Windows.Markup;
 
 namespace IconMaster
 {
@@ -24,30 +26,66 @@ namespace IconMaster
 
     }
 
-    public partial class ToolGrid : ItemsControl
+    [ContentProperty("Items")]
+    [DefaultProperty("Items")]
+    public partial class ToolGrid : UserControl
     {
 
         public readonly int Columns = 2;
-        public readonly int Rows = 1;
 
-        public void AddTool(UIElement element)
+        public ObservableCollection<ToolGridItem> Items => (ObservableCollection<ToolGridItem>)GetValue(ItemsProperty);
+
+        //public ObservableCollection<ToolGridItem> Items {
+        //    get => (ObservableCollection<ToolGridItem>)GetValue(ItemsProperty);
+        //    //set => SetValue(ItemsProperty, value);
+        //}
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public readonly static DependencyProperty ItemsProperty =
+            DependencyProperty.Register(
+                "MyProperty",
+                typeof(ObservableCollection<ToolGridItem>),
+                typeof(ToolGrid),
+                new PropertyMetadata(new ObservableCollection<ToolGridItem>())
+            );
+
+        public void AddTool(ToolGridItem item)
         {
-            if (gTools.Children.Count % Columns == 0)
+            int toolsCount = gTools.Children.Count;
+            if (toolsCount % Columns == 0)
             {
                 gTools.RowDefinitions.Add(new RowDefinition());
             }
-            _ = gTools.Children.Add(element);
+            RadioButton tool = new RadioButton {
+                Content = item.Content
+            };
+            Grid.SetRow(tool, toolsCount / Columns);
+            Grid.SetColumn(tool, toolsCount % Columns);
+            _ = gTools.Children.Add(tool);
         }
 
         public ToolGrid()
         {
             InitializeComponent();
 
-            gTools.ColumnDefinitions.Add(new ColumnDefinition());
-            gTools.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int i = 0; i < Columns; i++)
+            {
+                gTools.ColumnDefinitions.Add(new ColumnDefinition());
+            }
 
-            gTools.RowDefinitions.Add(new RowDefinition());
-            Debug.WriteLine(Items.Count);
+            //if (Items != null)
+            //{
+            //    Items.CollectionChanged += (sender, e) => {
+            //        foreach (ToolGridItem item in e.NewItems)
+            //        {
+            //            AddTool(item);
+            //        }
+            //    };
+            //}
+            //else
+            //{
+            //    Debug.WriteLine("Assertion failed");
+            //}
         }
     }
 }
