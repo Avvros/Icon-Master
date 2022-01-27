@@ -87,7 +87,7 @@ namespace IconMaster
         public void DrawPixel(int i, int j, Color color)
         {
             WriteableBitmap bitmap = DrawingContext.Bitmap;
-            if (i < 0 || i >= bitmap.PixelWidth || j < 0 || j >= bitmap.PixelHeight || color == null)
+            if (i < 0 || i >= bitmap.PixelWidth || j < 0 || j >= bitmap.PixelHeight)
             {
                 return;
             }

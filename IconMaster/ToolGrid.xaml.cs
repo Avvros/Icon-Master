@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Windows.Markup;
+using System;
 
 namespace IconMaster
 {
@@ -30,17 +31,10 @@ namespace IconMaster
     [DefaultProperty("Items")]
     public partial class ToolGrid : UserControl
     {
-
-        public readonly int Columns = 2;
-
         public ObservableCollection<ToolGridItem> Items => (ObservableCollection<ToolGridItem>)GetValue(ItemsProperty);
 
-        //public ObservableCollection<ToolGridItem> Items {
-        //    get => (ObservableCollection<ToolGridItem>)GetValue(ItemsProperty);
-        //    //set => SetValue(ItemsProperty, value);
-        //}
+        public int Columns { get; } = 2;
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public readonly static DependencyProperty ItemsProperty =
             DependencyProperty.Register(
                 "MyProperty",
@@ -56,12 +50,24 @@ namespace IconMaster
             {
                 gTools.RowDefinitions.Add(new RowDefinition());
             }
-            RadioButton tool = new RadioButton {
-                Content = item.Content
+            _ = gTools.Children.Add(CreateTool(item, toolsCount));
+        }
+
+        [Obsolete("Не имеет смысла")]
+        public void ChangeTool(ToolGridItem newItem, int idx)
+        {
+            gTools.Children.RemoveAt(idx);
+            gTools.Children.Insert(idx, CreateTool(newItem, idx));
+        }
+
+        private RadioButton CreateTool(ToolGridItem newItem, int idx)
+        {
+            RadioButton tool = new() {
+                Content = newItem.Content
             };
-            Grid.SetRow(tool, toolsCount / Columns);
-            Grid.SetColumn(tool, toolsCount % Columns);
-            _ = gTools.Children.Add(tool);
+            Grid.SetRow(tool, idx / Columns);
+            Grid.SetColumn(tool, idx % Columns);
+            return tool;
         }
 
         public ToolGrid()
@@ -73,19 +79,14 @@ namespace IconMaster
                 gTools.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            //if (Items != null)
-            //{
-            //    Items.CollectionChanged += (sender, e) => {
-            //        foreach (ToolGridItem item in e.NewItems)
-            //        {
-            //            AddTool(item);
-            //        }
-            //    };
-            //}
-            //else
-            //{
-            //    Debug.WriteLine("Assertion failed");
-            //}
+            Debug.Assert(Items is not null);
+            Items.CollectionChanged += (sender, e) => {
+                foreach (ToolGridItem item in e.NewItems)
+                {
+                    Debug.Assert(item is not null);
+                    AddTool(item);
+                }
+            };
         }
     }
 }

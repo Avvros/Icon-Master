@@ -9,27 +9,25 @@ namespace IconMaster.Core
 {
     public class DrawingContext
     {
-
-        protected readonly WriteableBitmap _bitmap;
         private Color _color;
 
         public override string ToString()
         {
-            return $"{nameof(DrawingContext)} {{ Bitmap = {_bitmap}, Color = {_color} }}";
+            return $"{nameof(DrawingContext)} {{ Bitmap = {Bitmap}, Color = {_color} }}";
         }
 
         public DrawingContext(WriteableBitmap bitmap)
         {
-            _bitmap = bitmap ?? throw new ArgumentNullException("Bitmap can't be null");
+            Bitmap = bitmap ?? throw new ArgumentNullException(nameof(bitmap));
             _color = Colors.Black;
         }
 
-        public Color Color { get => _color; set => _color = value != null ? value : Colors.Black; }
-        public WriteableBitmap Bitmap => _bitmap;
+        public Color Color { get => _color; set => _color = value; }
+        public WriteableBitmap Bitmap { get; }
 
         public void Draw(Tool brush, int x, int y)
         {
-            if (brush == null || x < 0 || y >= _bitmap.PixelWidth || y < 0 || y >= _bitmap.PixelHeight)
+            if (brush == null || x < 0 || y >= Bitmap.PixelWidth || y < 0 || y >= Bitmap.PixelHeight)
             {
                 return;
             }

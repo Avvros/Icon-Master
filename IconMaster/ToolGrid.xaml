@@ -21,6 +21,6 @@
             </Style>
             <!--<brushes:Pen ></brushes:Pen>-->
         </Grid.Resources>
-        <TextBlock DataContext="{Binding ElementName=toolGrid}"><Run Text="{Binding Items.Count, Mode=OneWay}"/></TextBlock>
+        <!--<TextBlock DataContext="{Binding ElementName=toolGrid}"><Run Text="{Binding Items.Count, Mode=OneWay}"/></TextBlock>-->
     </Grid>
 </UserControl>

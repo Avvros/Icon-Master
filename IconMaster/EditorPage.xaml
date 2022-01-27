@@ -11,7 +11,7 @@
     <Grid x:Name="Page" DataContext="{Binding ElementName=Root, Path=Editor}">
         <Border BorderBrush="Silver" BorderThickness="0,0,1,0" HorizontalAlignment="Left" Margin="0,0,0,25">
             <local:ToolGrid>
-                <local:ToolGridItem Content="{DynamicResource imgEraser}"/>
+                <local:ToolGridItem Content="{DynamicResource imgPencil}"/>
                 <local:ToolGridItem Content="{DynamicResource imgEraser}"/>
             </local:ToolGrid>
         </Border>
