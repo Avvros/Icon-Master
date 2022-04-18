@@ -25,6 +25,19 @@ namespace IconMaster
         public readonly static DependencyProperty ContentProperty =
             DependencyProperty.Register("Content", typeof(object), typeof(ToolGridItem), new PropertyMetadata(0));
 
+
+
+        public object Value {
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for Value.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(object), typeof(ToolGridItem), new PropertyMetadata(0));
+
+
+
     }
 
     [ContentProperty("Items")]

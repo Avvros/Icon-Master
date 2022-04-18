@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using IconMaster.Core;
+using IconMaster.Service;
 
 namespace IconMaster
 {
@@ -30,27 +31,29 @@ namespace IconMaster
 
         public Editor Editor { get; }
 
-        public EditorPage() : this(EditorGrid.DEFAULT_BITMAP())
+        public EditorPage() : this(Presets.Default())
         {
         }
 
         public EditorPage(WriteableBitmap bitmap)
         {
-            Editor = new Editor(bitmap);
+            Editor = new Editor() {
+                Bitmap = bitmap
+            };
             InitializeComponent();
         }
 
         private Point OnDrawingAction(MouseEventArgs e)
         {
             Point position = Workspace.GetRelativeMousePosition(e);
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                Workspace.DrawPixel((int)position.X, (int)position.Y, Colors.Black);
-            }
-            else if (e.RightButton == MouseButtonState.Pressed)
-            {
-                Workspace.DrawPixel((int)position.X, (int)position.Y, Colors.Transparent);
-            }
+            //if (e.LeftButton == MouseButtonState.Pressed)
+            //{
+            //    Workspace.DrawPixel((int)position.X, (int)position.Y, Colors.Black);
+            //}
+            //else if (e.RightButton == MouseButtonState.Pressed)
+            //{
+            //    Workspace.DrawPixel((int)position.X, (int)position.Y, Colors.Transparent);
+            //}
             return position;
         }
 

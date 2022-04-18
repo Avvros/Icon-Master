@@ -30,7 +30,7 @@
             <ToolBar x:Name="FileControls" Style="{DynamicResource IconMasterToolBarStyle}" HorizontalAlignment="Left" Background="White">
                 <Button x:Name="bNewFile" Content="{DynamicResource imgNewFile}" VerticalAlignment="Stretch"/>
                 <Button x:Name="bOpen" Content="{DynamicResource imgOpen}" Click="OpenFile" VerticalAlignment="Stretch"/>
-                <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}"/>
+                <Button x:Name="bSave" VerticalAlignment="Stretch" Content="{StaticResource imgSave}" Click="SaveFile"/>
                 <Button x:Name="bSaveAll" Content="{DynamicResource imgSaveAll}" VerticalAlignment="Stretch"/>
                 <Separator/>
                 <Button x:Name="bUndo" Style="{DynamicResource IconMasterPoweredControl}" Content="{DynamicResource imgUndo}" VerticalAlignment="Stretch" IsEnabled="False"/>

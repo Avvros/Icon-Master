@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace IconMaster.Service
 {
@@ -14,6 +15,13 @@ namespace IconMaster.Service
         {
             Trace.WriteLine($"At {memberName} ({sourceFilePath}:{sourceLineNumber}): {obj}");
             return obj;
+        }
+
+        private static string Dump<T>(this T obj)
+        {
+            StringBuilder sb = new();
+            sb.Append(typeof(T).Name);
+            return "";
         }
 
     }
